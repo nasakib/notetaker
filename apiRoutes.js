@@ -2,7 +2,7 @@ var fs = require("fs")
 
 module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
-    fs.readFile("../Develop/db/db.json", "utf8", function(err, data){
+    fs.readFile("./Develop/db/db.json", "utf8", function(err, data){
         if(err){
             res.status(500);
             return res.send("Sorry! There was an error.");
@@ -20,7 +20,7 @@ module.exports = function(app) {
       res.status(400);
       return res.send("ID is not valid.");
     }
-    fs.readFile("../Develop/db/db.json", function(err, data) {
+    fs.readFile("./Develop/db/db.json", function(err, data) {
       if (err) {
           console.log(err);
         res.status(500);
@@ -39,7 +39,7 @@ module.exports = function(app) {
     app.post("/api/notes", function(req, res) {
     console.log(req.body);
     var note = req.body;
-    fs.readFile("../Develop/db/db.json", "utf8", function(err, data){
+    fs.readFile("./Develop/db/db.json", "utf8", function(err, data){
         if(err){
             res.status(500);
             return res.send("Sorry! There was an error.");
@@ -48,7 +48,7 @@ module.exports = function(app) {
         notesArray.push(note);
         // res.json(notesArray)
         console.log(notesArray);
-        fs.writeFile("../Develop/db/db.json", JSON.stringify(notesArray), function(err){
+        fs.writeFile("./Develop/db/db.json", JSON.stringify(notesArray), function(err){
             if(err){
                 res.status(500);
                 return res.send("Sorry! There was an error.")
@@ -60,7 +60,7 @@ module.exports = function(app) {
 
   app.put("/api/notes/:id", function(req, res) {
     const index = parseInt(req.params.id);  
-    fs.readFile("../Develop/db/db.json", function(err, data) {
+    fs.readFile("./Develop/db/db.json", function(err, data) {
       if (err) {
         console.log(err);
         res.status(500);
@@ -84,7 +84,7 @@ module.exports = function(app) {
       res.status(400);
       return res.send("ID is not valid. Either does not exist or is not a number.");
     }
-    fs.readFile("../Develop/db/db.json", "utf8", function(err, data) {
+    fs.readFile("./Develop/db/db.json", "utf8", function(err, data) {
       if (err) {
           console.log(err);
         res.status(500);
